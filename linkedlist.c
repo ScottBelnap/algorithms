@@ -11,7 +11,7 @@ typedef struct node node;
 
 int main()
 {
-	node *current, *head;
+	node *current, *head, *merged;
 	int i;
 	head = NULL;
 	
@@ -38,6 +38,13 @@ int main()
     insert(&sorted, 2);
     insert(&sorted, 7);
     insert(&sorted, 8);
+    print(sorted);
+
+    node* s2 = NULL;
+    insert(&s2, 10);
+    insert(&s2, 11);
+    insert(&s2, 12);
+    appendLists(&sorted, &s2);
     print(sorted);
 }
 
@@ -115,4 +122,18 @@ insert(node** head, int number){
             temp4->next = NULL;
         }
     }
+}
+
+appendLists(node **first, node **second){
+    if(*first == NULL){
+        *first = *second;
+    }
+    else{
+        node* temp = *first;
+        while(temp->next != NULL){
+            temp = temp->next;
+        }
+        temp->next = *second;
+    }
+    *second = NULL;
 }
