@@ -12,19 +12,12 @@ typedef struct node node;
 
 int main()
 {
-    node *trunk = (node *)malloc(sizeof(node));
-    node *left = (node *)malloc(sizeof(node));
-    node *right = (node *)malloc(sizeof(node));
-    trunk->data = 1;
-    trunk->right = NULL;
-    left->data = 2;
-    left->left = NULL;
-    left->right = NULL;
-    right->data = 3;
-    right->left = NULL;
-    right->right = NULL;
-    trunk->left = left;
-    trunk->right = right;
+    node *trunk = NULL;
+    insert(&trunk, 10);
+    insert(&trunk, 3);
+    insert(&trunk, 2);
+    insert(&trunk, 6);
+    insert(&trunk, 12);
     int c = countNodes(trunk);
     printf("count %d\n", c);
 }
@@ -38,3 +31,21 @@ int countNodes(node *trunk){
         return 0;
     }
 }
+
+insert(node **head, int key){
+    if(*head == NULL){
+        (*head) = (node *)malloc(sizeof(node));
+        (*head)->data = key;
+        (*head)->left = NULL;
+        (*head)->right = NULL;
+        return;
+    }
+    if(key > (*head)->data){
+        insert(&((*head)->left), key);
+    }
+    else{
+        insert(&((*head)->right), key);
+    }
+
+}
+
