@@ -18,8 +18,13 @@ int main()
     insert(&trunk, 2);
     insert(&trunk, 6);
     insert(&trunk, 12);
+    inorder(trunk);
     int c = countNodes(trunk);
     printf("count %d\n", c);
+    preorder(trunk);
+    printf("\n");
+    min(trunk);
+    max(trunk);
 }
 
 int countNodes(node *trunk){
@@ -41,11 +46,44 @@ insert(node **head, int key){
         return;
     }
     if(key > (*head)->data){
-        insert(&((*head)->left), key);
+        insert(&((*head)->right), key);
     }
     else{
-        insert(&((*head)->right), key);
+        insert(&((*head)->left), key);
     }
 
 }
 
+inorder(node *head){
+    if(head){
+        inorder(head->left);
+        printf("%d ", head->data);
+        inorder(head->right);
+    }
+}
+
+preorder(node *head){
+    if(head){
+        printf("%d ", head->data);
+        preorder(head->left);
+        preorder(head->right);
+    }
+}
+
+min(node *head){
+    if(head->left == NULL){
+        printf("Minimum value: %d\n", head->data);
+    }
+    else{
+        min(head->left);
+    }
+}
+
+max(node *head){
+    if(head->right == NULL){
+        printf("Maximum value: %d\n", head->data);
+    }
+    else{
+        max(head->right);
+    }
+}
