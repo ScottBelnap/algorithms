@@ -29,23 +29,24 @@ int main()
 	delete(head);
     
     node* sorted = NULL;
-    insert(&sorted, 3);
-    insert(&sorted, 4);
-    insert(&sorted, 6);
-    insert(&sorted, 5);
-    insert(&sorted, 9);
-    insert(&sorted, 1);
-    insert(&sorted, 2);
-    insert(&sorted, 7);
-    insert(&sorted, 8);
+    insertInList(&sorted, 3);
+    insertInList(&sorted, 4);
+    insertInList(&sorted, 6);
+    insertInList(&sorted, 5);
+    insertInList(&sorted, 9);
+    insertInList(&sorted, 1);
+    insertInList(&sorted, 2);
+    insertInList(&sorted, 7);
+    insertInList(&sorted, 8);
     print(sorted);
 
     node* s2 = NULL;
-    insert(&s2, 10);
-    insert(&s2, 11);
-    insert(&s2, 12);
+    insertInList(&s2, 10);
+    insertInList(&s2, 11);
+    insertInList(&s2, 12);
     appendLists(&sorted, &s2);
     print(sorted);
+	printf("Nth: %d\n", getNth(sorted, 3));
 }
 
 print(node *head){
@@ -79,7 +80,7 @@ delete(struct node *head){
 	head = NULL;	
 }
 
-insert(node** head, int number){
+insertInList(node** head, int number){
 	printf("Inserting %d\n", number);
     if(*head == NULL){
         printf("null list, creating a new one\n");
@@ -136,4 +137,15 @@ appendLists(node **first, node **second){
         temp->next = *second;
     }
     *second = NULL;
+}
+
+int getNth(node *head, int index){
+	node *temp = head;
+	int i = 1;
+	for(temp = head; temp != NULL; temp = temp->next){
+		if(i == index){
+			return temp->data;
+		}
+		i++;
+	}
 }
